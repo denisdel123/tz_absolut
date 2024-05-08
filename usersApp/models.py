@@ -6,6 +6,8 @@ NULLABLE = {
     'blank': True
 }
 
+"""Модель пользователя."""
+
 
 class User(AbstractUser):
     username = None
@@ -14,6 +16,7 @@ class User(AbstractUser):
     country = models.CharField(max_length=100, **NULLABLE, verbose_name='Страна')
     city = models.CharField(max_length=100, **NULLABLE, verbose_name='Город')
     phone = models.CharField(max_length=20, **NULLABLE, verbose_name='Телефон')
+    code = models.CharField(max_length=10, **NULLABLE, verbose_name='Проверочное слово')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
