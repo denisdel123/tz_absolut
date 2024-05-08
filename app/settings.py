@@ -13,7 +13,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# dotenv
+"""Секретные фразы."""
 load_dotenv()
 PASSWORD_MAIL_RU = os.getenv('PASSWORD_MAIL_RU')
 ADDRESS_MAIL_RU = os.environ.get("ADDRESS_MAIL_RU")
@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'usersApp',
 ]
 
 MIDDLEWARE = [
@@ -123,15 +125,17 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATIC_FILES_DIR = (
-        BASE_DIR / 'static'
-)
+STATICFILES_DIR = BASE_DIR / 'static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+"""Настройка модели пользователя."""
+AUTH_USER_MODEL = 'usersApp.User'
+
+"""Настройка отправление сообщения по email."""
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 587
