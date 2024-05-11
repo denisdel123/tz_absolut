@@ -1,13 +1,11 @@
 from django.urls import path
 
 from usersApp.apps import UsersappConfig
-from usersApp.views.users import main, email_confirm, send_code, Logout, Login
+from usersApp.views.users import email_confirm, send_code, Logout, Login
 
 app_name = UsersappConfig.name
 
 urlpatterns = [
-    # Главная
-    path('', main, name='main'),
 
     # Подтверждение почты и регистрация пользователя
     path('send_code/', send_code, name='send_code'),

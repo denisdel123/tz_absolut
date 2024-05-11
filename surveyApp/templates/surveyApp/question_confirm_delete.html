@@ -13,7 +13,7 @@
                         <p>Вы действительно хотите удалить?</p>
 
                         <button class="btn btn-danger btn-lg" type="submit">Удалить</button>
-                        <a href="{% url 'surveyApp:list_survey' %}" class="btn btn-warning">Отмена</a>
+                        <a href="{% url 'surveyApp:detail_survey' object.survey.pk %}" class="btn btn-warning">Отмена</a>
                     </form>
                 </div>
             </div>

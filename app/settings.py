@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'mainApp',
     'usersApp',
     'surveyApp',
 ]
@@ -145,7 +146,9 @@ EMAIL_HOST_USER = ADDRESS_MAIL_RU
 EMAIL_HOST_PASSWORD = PASSWORD_MAIL_RU
 DEFAULT_FROM_EMAIL = ADDRESS_MAIL_RU
 
-
-LOGOUT_REDIRECT_URL = '/'
-LOGIN_REDIRECT_URL = '/'
+# путь после успешного выхода из системы
+LOGOUT_REDIRECT_URL = '/users/'
+# путь после успешного входа в систему
+LOGIN_REDIRECT_URL = '/users/'
+# путь на страницу для входа
 LOGIN_URL = '/users/'

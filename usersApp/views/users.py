@@ -19,10 +19,6 @@ class Logout(LogoutView):
     pass
 
 
-def main(request):
-    return render(request, 'usersApp/main.html')
-
-
 def send_code(request):
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -65,7 +61,7 @@ def email_confirm(request):
             del request.session['confirmation_code']
             del request.session['user_email']
 
-            return redirect('usersApp:main')
+            return redirect('mainApp:main')
 
         else:
             messages.error(request, 'не верный код попробуйте снова!')
@@ -79,4 +75,4 @@ def email_confirm(request):
 
 class ChangePassword(PasswordChangeView):
     template_name = "usersApp/change_password.html"
-    success_url = reverse_lazy('usersApp:main')
+    success_url = reverse_lazy('mainApp:main')
