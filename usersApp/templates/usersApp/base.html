@@ -77,20 +77,18 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                 <li class="nav-item">
-                    <a class="nav-link " href="{% url 'usersApp:send_code' %}">Статьи</a>
+                    <a class="nav-link " href="{% url 'usersApp:send_code' %}">Отправить код</a>
                 </li>
 
-                {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link " href="{% url 'usersApp:confirm' %}">Мои статьи</a>
+                    <a class="nav-link " href="{% url 'usersApp:confirm' %}">Подтвердить почту</a>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Настройки</a>
                     <ul class="dropdown-menu">
-                        {% if perms.mailingApp.view_massage %}
-                        <li><a class="dropdown-item" href="#">Сообщение</a></li>
-                        {% endif %}
+                        <li><a class="dropdown-item" href="{% url 'surveyApp:list_survey' %}">опросы</a></li>
+
                         {% if perms.mailingApp.view_mailing %}
                         <li><a class="dropdown-item" href="#">Рассылки</a></li>
                         {% endif %}
@@ -102,8 +100,8 @@
 
                     </ul>
                 </li>
-                {% endif %}
             </ul>
+
             {% if user.is_authenticated %}
             <form method="post" action="{% url 'usersApp:logout' %}">
                 {% csrf_token %}
