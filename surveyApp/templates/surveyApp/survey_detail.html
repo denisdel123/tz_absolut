@@ -53,14 +53,14 @@
                 <div class="card-header">Вопросы</div>
 
                 <div class="header-content">
-                    <a href="#"
+                    <a href="{% url 'surveyApp:create_question'%}?survey_id={{object.pk}}"
                        class="btn btn-lg btn-block btn-outline-primary">Создать Вопрос</a>
                 </div>
 
                 <div class="card-body">
 
 
-                    {% for question in object.questions.all %}
+                    {% for question in questions %}
                     <div class="d-flex text-body-secondary pt-3">
 
                         <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
@@ -72,17 +72,16 @@
 
                         <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
                             <div class="d-flex justify-content-between">
-                                <strong class="text-gray-dark">{{ question.text }}</strong>
-                                <strong class="text-gray-dark">{{ question.question_type }}</strong>
-
+                                <strong class="text-gray-dark">Вопрос: {{question.text}}</strong>
                             </div>
+                            <strong class="text-gray-dark">Тип вопроса: {{question.question_type }}</strong>
 
                         </div>
 
-                        <a href="{% url 'surveyApp:update_question' question.pk %}"
+                        <a href="{% url 'surveyApp:update_question' question.pk %}?survey_id={{object.pk}}"
                            class="btn btn-lg btn-block btn-outline-primary">Редактировать</a>
 
-                        <a href="{% url 'surveyApp:delete_question' question.pk %}"
+                        <a href="{% url 'surveyApp:delete_question' question.pk %}?survey_id={{object.pk}}"
                            class="btn btn-lg btn-block btn-outline-primary">удалить</a>
 
                     </div>

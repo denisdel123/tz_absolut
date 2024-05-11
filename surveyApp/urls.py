@@ -1,6 +1,7 @@
 from django.urls import path
 
 from surveyApp.apps import SurveyappConfig
+from surveyApp.views.question import QuestionCreateView, QuestionListView, QuestionDeleteView, QuestionUpdateView
 from surveyApp.views.survey import SurveyCreateView, SurveyUpdateView, SurveyDeleteView, SurveyListView, \
     SurveyDetailView
 
@@ -8,10 +9,16 @@ app_name = SurveyappConfig.name
 
 urlpatterns = [
     # CRUD survey
-    path('create/', SurveyCreateView.as_view(), name='create_survey'),
-    path('list/', SurveyListView.as_view(), name='list_survey'),
-    path('detail/<int:pk>/', SurveyDetailView.as_view(), name='detail_survey'),
-    path('update/<int:pk>/', SurveyUpdateView.as_view(), name='update_survey'),
-    path('delete/<int:pk>/', SurveyDeleteView.as_view(), name='delete_survey'),
+    path('create/survey/', SurveyCreateView.as_view(), name='create_survey'),
+    path('list/survey/', SurveyListView.as_view(), name='list_survey'),
+    path('detail/survey/<int:pk>/', SurveyDetailView.as_view(), name='detail_survey'),
+    path('update/survey/<int:pk>/', SurveyUpdateView.as_view(), name='update_survey'),
+    path('delete/survey/<int:pk>/', SurveyDeleteView.as_view(), name='delete_survey'),
+
+    # CRUD question
+    path('create/question/', QuestionCreateView.as_view(), name='create_question'),
+    path('list/question/', QuestionListView.as_view(), name='list_question'),
+    path('update/question/<int:pk>/', QuestionUpdateView.as_view(), name='update_question'),
+    path('delete/question/<int:pk>/', QuestionDeleteView.as_view(), name='delete_question'),
 
 ]

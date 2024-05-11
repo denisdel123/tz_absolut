@@ -1,7 +1,7 @@
 from django.forms import CheckboxInput
 from django import forms
 
-from surveyApp.models import Survey
+from surveyApp.models import Survey, Question
 
 
 class StyleFormMixin:
@@ -16,3 +16,9 @@ class SurveyForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Survey
         fields = ('title', 'description',)
+
+
+class QuestionForm(StyleFormMixin, forms.ModelForm):
+    class Meta:
+        model = Question
+        fields = ('text', 'question_type',)
