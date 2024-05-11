@@ -1,52 +1,66 @@
+import random
+
 from django.contrib import messages
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.utils.crypto import get_random_string
 from django.views import generic
 
-from usersApp.forms import RegistrationForm
 from usersApp.models import User
-from usersApp.services import all_send_mail
+from usersApp.services import all_send_mail, send_secret_code, confirm_email, create_secret_code
+
+
+class Login(LoginView):
+    template_name = 'usersApp/login.html'
+
+
+class Logout(LogoutView):
+    pass
 
 
 def main(request):
-    return render(request, 'usersApp/base.html')
+    return render(request, 'usersApp/main.html')
 
 
 def send_code(request):
     if request.method == 'POST':
         email = request.POST.get('email')
-        subject = 'Подтверждение Почты'
-        code = get_random_string(4)
-        massage = f'ваше код-слово {code}'
-        email_list = [email]
-        all_send_mail(subject, massage, email_list)
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'Пользователь с таким email уже существует.')
+            return render(request, 'usersApp/send_word.html',
+                          {'email': email, 'messages': messages.get_messages(request)})
+        else:
+            code = create_secret_code()
+            subject = 'Подтверждение Почты'
+            massage = f'ваше код-слово {code}'
+            all_send_mail(subject, massage, [email])
 
-        request.session['confirmation_code'] = code
-        request.session['user_email'] = email
+            request.session['confirmation_code'] = code
+            request.session['user_email'] = email
 
-        return redirect('usersApp:confirm')
+            return redirect('usersApp:confirm')
 
     else:
-        # Отображение страницы с формой для отправки
-        # Замените 'send_code.html' на имя вашего HTML-шаблона
-        return render(request, 'usersApp/send_word.html')
+        action = reverse('usersApp:send_code')
+        return render(request, 'usersApp/send_word.html', {"action": action})
 
 
 def email_confirm(request):
     if request.method == 'POST':
         code = request.POST.get('text')
         saved_code = request.session.get('confirmation_code')
-        user_email = [request.session.get('user_email')]
+        user_email = request.session.get('user_email')
 
-        if saved_code == code:
-            user = User.objects.create(email=user_email,)
+        if confirm_email(code, saved_code):
+            user = User.objects.create(email=user_email, )
             passw = get_random_string(9)
             user.set_password(passw)
             user.save()
+
             subject = 'Поздравляем с регистрацией!'
             massage = f'ваш пароль: {passw}'
-            all_send_mail(subject, massage, user_email)
+            all_send_mail(subject, massage, [user_email])
 
             del request.session['confirmation_code']
             del request.session['user_email']
@@ -59,4 +73,10 @@ def email_confirm(request):
         return render(request, 'usersApp/confirm.html')
 
     else:
-        return render(request, 'usersApp/confirm.html')
+        action = reverse("usersApp:confirm")
+        return render(request, 'usersApp/confirm.html', {'action': action})
+
+
+class ChangePassword(PasswordChangeView):
+    template_name = "usersApp/change_password.html"
+    success_url = reverse_lazy('usersApp:main')

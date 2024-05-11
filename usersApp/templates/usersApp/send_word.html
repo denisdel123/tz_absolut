@@ -2,13 +2,12 @@
 {% block content %}
 <div class="row">
     <div class="col-3">Добро пожаловать!</div>
-    <div class="description">Введите адрес электронной почты для входа или регистрации</div>
     <div class="col-6">
         <div class="card">
-            <div class="card-header">Введите код отправленный на почту</div>
+            <div class="card-header">Введите адрес электронной почты.</div>
             <div class="card-body">
 
-                <form method="post" action="{% url 'usersApp:send_code' %}">
+                <form method="post" action="{{action}}">
                     {% csrf_token %}
                     <input type="email" id="email" name="email">
                     <button type="submit" class="btn btn-success">Подтвердить</button>

@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-header">Введите код отправленный на почту</div>
             <div class="card-body">
-                <form method="post" action="{% url 'usersApp:confirm' %}">
+                <form method="post" action="{{action}}}">
                     {% csrf_token %}
                     <input type="text" id="text" name="text">
                     <button type="submit" class="btn btn-success">Подтвердить</button>
