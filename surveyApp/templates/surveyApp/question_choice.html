@@ -1,0 +1,25 @@
+{% extends 'usersApp/base.html' %}
+
+{% block content %}
+<div class="container">
+    <main>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row g-5">
+
+                <div class="col-md-7 col-lg-8">
+
+                    <h4 class="mb-3">{{question1.text}}</h4>
+
+                    <form method="post" action="surveyApp:answer_question">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit">Подтвердить</button>
+                    </form>
+
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+{% endblock

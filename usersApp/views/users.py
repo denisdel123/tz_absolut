@@ -59,9 +59,9 @@ def email_confirm(request):
             all_send_mail(subject, massage, [user_email])
 
             del request.session['confirmation_code']
-            del request.session['user_email']
 
-            return redirect('mainApp:main')
+            # ссылаться на опрос с вопросами
+            return redirect('surveyApp:question_text')
 
         else:
             messages.error(request, 'не верный код попробуйте снова!')

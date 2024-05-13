@@ -90,7 +90,7 @@
                         <li><a class="dropdown-item" href="{% url 'surveyApp:list_survey' %}">опросы</a></li>
 
                         {% if perms.mailingApp.view_mailing %}
-                        <li><a class="dropdown-item" href="#">Рассылки</a></li>
+                        <li><a class="dropdown-item" href="{% url 'surveyApp:question_text' %}">Рассылки</a></li>
                         {% endif %}
                         {% if perms.usersApp.view_user %}
                         <li><a class="dropdown-item" href="#">Пользователи</a></li>
@@ -111,7 +111,7 @@
             </form>
             {% else %}
 
-            <form method="post" action="#">
+            <form method="post" action="{% url 'usersApp:login' %}">
                 {% csrf_token %}
                 {% if user.is_superuser %}
                 <a href="/admin" class="btn btn-outline-warning" type="submit">Администратор</a>

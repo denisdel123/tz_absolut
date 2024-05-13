@@ -22,3 +22,9 @@ class QuestionForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Question
         fields = ('text', 'question_type',)
+
+
+class ChoiceTypeForm(forms.Form):
+
+    my_choice_field = forms.ChoiceField(choices=[])
+

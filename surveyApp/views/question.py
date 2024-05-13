@@ -1,5 +1,5 @@
 from django.http import HttpResponseBadRequest
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -48,3 +48,25 @@ class QuestionDeleteView(generic.DeleteView):
         survey_id = int(self.request.GET.get('survey_id'))
         detail_url = reverse_lazy('surveyApp:detail_survey', kwargs={'pk': survey_id})
         return detail_url
+
+
+def ask(request):
+    print('ask')
+    survey = Survey.objects.first()
+    questions = survey.questions.all()
+
+    answered_questions = request.session.get('answered_questions', [])
+    print(answered_questions)
+
+    next_question = None
+    for question in questions:
+        print(question)
+        if str(question.pk) not in answered_questions:
+            next_question = question
+            break
+
+    if next_question:
+        return render(request, 'surveyApp/question_text.html', {'survey': survey, 'question': next_question})
+    else:
+        return redirect('surveyApp:survey_completed')
+
