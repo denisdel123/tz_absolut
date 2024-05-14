@@ -43,3 +43,5 @@ def send_secret_code(email, code):
 def confirm_email(code, saved_code):
     if code == saved_code:
         return True
+    else:
+        return False

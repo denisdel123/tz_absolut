@@ -91,7 +91,6 @@
             </ul>
             {% endif %}
 
-
             <form method="post" action="{% url 'usersApp:logout' %}">
                 {% csrf_token %}
                 {% if user.is_superuser %}
@@ -101,8 +100,6 @@
                 <button class="btn btn-outline-danger" type="submit">Выйти</button>
             </form>
             {% endif %}
-
-
 
         </div>
     </div>
