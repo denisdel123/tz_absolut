@@ -94,15 +94,15 @@
 
             <form method="post" action="{% url 'usersApp:logout' %}">
                 {% csrf_token %}
+                {% if user.is_superuser %}
                 <a href="/admin" class="btn btn-outline-warning" type="submit">Администратор</a>
+                {% endif %}
                 <a href="{% url 'usersApp:detail_user' user.pk %}" class="btn btn-outline-secondary" type="submit">Профиль</a>
                 <button class="btn btn-outline-danger" type="submit">Выйти</button>
             </form>
             {% endif %}
 
-            {% if user.is_superuser %}
-            <a href="/admin" class="btn btn-outline-warning" type="submit">Администратор</a>
-            {% endif %}
+
 
         </div>
     </div>
