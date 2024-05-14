@@ -1,7 +1,7 @@
 from django.urls import path
 
 from usersApp.apps import UsersappConfig
-from usersApp.views.users import email_confirm, send_code, Logout, Login
+from usersApp.views.users import email_confirm, send_code, Logout, Login, UserDetailView
 
 app_name = UsersappConfig.name
 
@@ -15,5 +15,8 @@ urlpatterns = [
     # Вход и выход пользователя
     path('login/', Login.as_view(), name='login'),
     path('logout/', Logout.as_view(), name='logout'),
+
+    # Профиль пользователя
+    path('detail/<int:pk>', UserDetailView.as_view(), name='detail_user')
 
 ]

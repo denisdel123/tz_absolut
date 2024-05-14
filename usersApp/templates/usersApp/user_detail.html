@@ -1,0 +1,131 @@
+{% extends 'usersApp/base.html' %}
+{% block content %}
+
+
+<div class="image-container">
+
+
+</div>
+
+<div class="col-12">
+
+    <div class="row">
+
+        <div class="col-6">
+
+            <div class="card mb-4 box-shadow">
+
+                <div class="card-header">
+                    <tr>
+                        <h1>Профиль</h1>
+                    </tr>
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table table-striped">
+
+                        <tr>
+                            <td class="w-25">Имя</td>
+                            <td>{{ object.first_name }}</td>
+                        </tr>
+
+                        <tr>
+                            <td class="w-25">Фамилия</td>
+                            <td>{{ object.last_name }}</td>
+
+                        </tr>
+
+                        <tr>
+                            <td class="w-25">Почта</td>
+                            <td>{{object.email}}</td>
+                        </tr>
+
+
+                        <tr>
+                            <td class="w-25">Права менеджера</td>
+                            {% if object.is_staff%}
+                            <td>Да</td>
+                            {% else %}
+                            <td>Нет</td>
+                            {% endif %}
+                        </tr>
+
+                        <tr>
+                            <td class="w-25">Права администратора</td>
+                            {% if object.is_superuser%}
+                            <td>Да</td>
+                            {% else %}
+                            <td>Нет</td>
+                            {% endif %}
+                        </tr>
+
+
+                    </table>
+
+                    {% if perms.usersApp.view_user %}
+                    <a href="#"
+                       class="btn btn-lg btn-block btn-outline-primary">Назад</a>
+                    {% endif %}
+
+                    {% if user == object %}
+                    <a href="#" class="btn btn-lg btn-block btn-outline-primary">Редактировать</a>
+                    {% endif %}
+
+                    {% if perms.usersApp.delete_user %}
+                    <a href="#"
+                       class="btn btn-lg btn-block btn-outline-primary">Удалить</a>
+                    {% endif %}
+
+                </div>
+
+                <div class="card-footer">
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-3">
+
+            <div class="card">
+
+                <div class="card-header">Список вопросов и ответов</div>
+
+                <div class="card-body">
+
+                    {% for answer in user.answer.all %}
+                    <div class="d-flex text-body-secondary pt-3">
+
+                        <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
+                             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
+                             preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
+                            <rect width="100%" height="100%" fill="#007bff"/>
+                            <text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>
+                        </svg>
+
+                        <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+                            <div class="d-flex justify-content-between">
+                                <strong class="text-gray-dark">{{ answer.question.text }}</strong>
+                                <a href="#">Перейти</a>
+                            </div>
+                            {% if answer.text_answer %}
+                            <span class="d-block">{{ answer.text_answer}}</span>
+                            {% elif answer.choice_answer %}
+                            <span class="d-block">{{ answer.choice_answer}}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

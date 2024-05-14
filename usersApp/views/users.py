@@ -19,6 +19,20 @@ class Logout(LogoutView):
     pass
 
 
+class UserDetailView(generic.DetailView):
+    model = User
+
+    def get_success_url(self):
+        object_id = self.object.pk
+        detail_url = reverse_lazy('usersApp:detail_user', kwargs={'pk': object_id})
+        return detail_url
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context["user"] = self.request.user
+        return context
+
+
 def send_code(request):
     if request.method == 'POST':
         email = request.POST.get('email')

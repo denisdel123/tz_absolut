@@ -7,8 +7,6 @@ from surveyApp.models import Answer, Survey, Question
 from usersApp.models import User
 
 
-
-
 class AnswerCreateView(generic.CreateView):
     model = Answer
     fields = ['text_answer', 'choice_answer']

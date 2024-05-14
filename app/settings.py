@@ -147,8 +147,8 @@ EMAIL_HOST_PASSWORD = PASSWORD_MAIL_RU
 DEFAULT_FROM_EMAIL = ADDRESS_MAIL_RU
 
 # путь после успешного выхода из системы
-LOGOUT_REDIRECT_URL = '/users/'
+LOGOUT_REDIRECT_URL = '/'
 # путь после успешного входа в систему
-LOGIN_REDIRECT_URL = '/users/'
+LOGIN_REDIRECT_URL = '/'
 # путь на страницу для входа
 LOGIN_URL = '/users/'
