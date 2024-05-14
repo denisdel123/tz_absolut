@@ -1,5 +1,4 @@
 from django.core.mail import send_mail
-from django.utils.crypto import get_random_string
 import random
 from app.settings import ADDRESS_MAIL_RU
 

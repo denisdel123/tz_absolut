@@ -1,9 +1,7 @@
-from django.shortcuts import render, redirect
-from django.urls import reverse, reverse_lazy
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
 from django.views import generic
-
-from surveyApp.forms import TextTypeForm, ChoiceTypeForm
-from surveyApp.models import Answer, Survey, Question
+from surveyApp.models import Answer, Question
 from usersApp.models import User
 
 

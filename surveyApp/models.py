@@ -75,6 +75,3 @@ class Answer(models.Model):
 
     text_answer = models.TextField(**NULLABLE, verbose_name='Текстовый ответ')
     choice_answer = models.CharField(**NULLABLE, verbose_name='Список ответов')
-
-
-

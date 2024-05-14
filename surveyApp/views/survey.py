@@ -1,6 +1,5 @@
 from django.urls import reverse_lazy
 from django.views import generic
-
 from surveyApp.forms import SurveyForm
 from surveyApp.models import Survey
 

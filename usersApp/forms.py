@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm
-from django.forms import CheckboxInput, ModelForm
+from django.forms import CheckboxInput
 
 from usersApp.models import User
 
@@ -16,4 +16,3 @@ class RegistrationForm(StyleFormMixin, UserCreationForm):
     class Meta:
         model = User
         fields = ['email', 'password1', 'password2']
-

@@ -24,5 +24,3 @@ class Command(BaseCommand):
         )
         superuser.set_password(PASS_SUPERUSER)
         superuser.save()
-
-

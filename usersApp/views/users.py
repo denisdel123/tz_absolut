@@ -1,5 +1,3 @@
-import random
-
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.shortcuts import render, redirect
@@ -8,7 +6,7 @@ from django.utils.crypto import get_random_string
 from django.views import generic
 
 from usersApp.models import User
-from usersApp.services import all_send_mail, send_secret_code, confirm_email, create_secret_code
+from usersApp.services import all_send_mail, confirm_email, create_secret_code
 
 
 class Login(LoginView):
