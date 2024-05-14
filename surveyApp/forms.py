@@ -1,7 +1,7 @@
 from django.forms import CheckboxInput
 from django import forms
 
-from surveyApp.models import Survey, Question
+from surveyApp.models import Survey, Question, Answer
 
 
 class StyleFormMixin:
@@ -24,7 +24,29 @@ class QuestionForm(StyleFormMixin, forms.ModelForm):
         fields = ('text', 'question_type',)
 
 
-class ChoiceTypeForm(forms.Form):
-
+class ChoiceTypeForm(StyleFormMixin, forms.ModelForm):
     my_choice_field = forms.ChoiceField(choices=[])
+    choice_answer = forms.CharField(widget=forms.HiddenInput(), required=False)
 
+    class Meta:
+        model = Answer
+        fields = []
+
+    def __init__(self, *args, **kwargs):
+        question = kwargs.pop('question', None)
+        options = kwargs.pop('options', [])
+        super().__init__(*args, **kwargs)
+
+        if question:
+            self.fields['my_choice_field'].choices = self.get_choices_for_question(question, options)
+
+    def get_choices_for_question(self, question, options):
+        return options
+
+
+class TextTypeForm(StyleFormMixin, forms.ModelForm):
+    my_text_field = forms.CharField()
+
+    class Meta:
+        model = Answer
+        fields = ['text_answer']

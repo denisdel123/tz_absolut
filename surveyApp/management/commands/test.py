@@ -10,4 +10,4 @@ class Command(BaseCommand):
         for answer in answers:
             print(answer.question.text)
             print(answer.text_answer)
-            print()
+            print(answer.choice_answer)

@@ -3,23 +3,21 @@
 {% block content %}
 <div class="container">
     <main>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="row g-5">
+        <div class="row g-5">
 
-                <div class="col-md-7 col-lg-8">
+            <div class="col-md-7 col-lg-8">
+                <h4 class="mb-3">{{question.text}}</h4>
 
-                    <h4 class="mb-3">{{question1.text}}</h4>
+                <form method="post" action="{% url 'surveyApp:answer_create' %}">
+                    {% csrf_token %}
+                    {{ form.my_choice_field }}
+                    {{ form.choice_answer }}
+                    <input type="hidden" name="question_id" value="{{ question.pk }}">
+                    <button type="submit">Подтвердить</button>
+                </form>
 
-                    <form method="post" action="surveyApp:answer_question">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <button type="submit">Подтвердить</button>
-                    </form>
-
-                </div>
             </div>
-        </form>
+        </div>
     </main>
 </div>
-{% endblock
+{% endblock %}

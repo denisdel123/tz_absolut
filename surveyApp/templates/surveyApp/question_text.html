@@ -12,7 +12,7 @@
 
                     <form method="post" action="{% url 'surveyApp:answer_create' %}">
                         {% csrf_token %}
-                        <input type="hidden" name="question_id" value="{{ question.id }}">
+                        <input type="hidden" name="question_id" value="{{ question.pk }}">
                         <input type="text" name="answer">
                         <button type="submit">Подтвердить</button>
                     </form>

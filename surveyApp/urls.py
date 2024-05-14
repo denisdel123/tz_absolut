@@ -24,6 +24,7 @@ urlpatterns = [
 
     # Answer
     path('question/text/', ask, name='question_text'),
+    path('question/choice/', ask, name='question_choice'),
     path('answer/create/', AnswerCreateView.as_view(), name='answer_create'),
     path('survey/completed/', completed, name='survey_completed'),
 
