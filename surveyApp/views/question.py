@@ -70,7 +70,7 @@ def ask(request):
         else:
 
             late_answer = request.session.get('late_answer')
-            with open('data.json', 'r', encoding='utf-8') as file:
+            with open('choices.json', 'r', encoding='utf-8') as file:
                 data = json.load(file)
             if late_answer:
 
